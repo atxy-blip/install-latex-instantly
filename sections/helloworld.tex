@@ -1,0 +1,49 @@
+\section{Hello world!}
+\label{sec:hw}
+
+\begin{widepar}
+  终于到了验收成果的时候！这一节会对本地安装进行验证，并通过 VS Code 完成你的第一个项目。
+\end{widepar}
+
+
+\subsection{测试引擎}
+
+假如你严格地遵守了前述的安装步骤，此时打开终端，输入 \texttt{xelatex} 命令，按下回车键后就会出现这样的信息：\sidenote{注意到版本号数字了吗？按照高德纳教授的设计，\TeX 是不断趋于完美的，而它的版本号最终会收敛到 $\pi$！}
+
+\begin{shellexample}
+  This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2021/W32TeX) (preloaded format=xelatex)
+  restricted \write18 enabled.
+  **
+\end{shellexample}
+
+这表明相关的引擎已经可以被系统正确调用。输入字母 \texttt{x} 退出引擎，然后关掉终端吧！
+
+\subsection{配置编辑器}
+
+出于不便透露的原因\sidenote{利益相关，真滴好用！}，此处仅推荐 Microsoft Visual Studio Code 软件作为配套的文本编辑器。请善用搜索引擎获取其他编辑器的配置方法。
+
+\begin{marginfigure}
+\centering
+\includegraphics[width=0.3\textwidth]{extension-icon}
+\caption{也可以直接点击“扩展”图标，长上面这样，}
+\end{marginfigure}
+
+\medskip
+\href{https://code.visualstudio.com/Download}{\faCloudDownload* VS Code 官网下载页}
+\medskip
+
+安装完成后，打开 Visual Studio Code 应用程序，使用快捷键 \kbd{Ctrl} + \kbd{Shift} + \kbd{X} 打开扩展列表，在应用商店中搜索并安装以下两个扩展：
+\begin{itemize}
+  \item Chinese (Simplified)\sidenote{搜这个就行，语言包全称太长了。}
+  \item LaTeX Workshop
+\end{itemize}
+
+
+\subsection{第一个项目}
+
+\begin{latexexample}
+  \documentclass{ctexart}
+  \begin{document}
+  你好，\LaTeX{}!
+  \end{document}
+\end{latexexample}

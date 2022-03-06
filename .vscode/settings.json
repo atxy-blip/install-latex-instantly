@@ -1,0 +1,100 @@
+{
+    "latex-workshop.latex.autoBuild.run": "never", // 禁止保存时自动编译
+    "latex-workshop.latex.recipe.default": "lastUsed", // 使用前一次的编译方法
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-shell-escape",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-shell-escape",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "lualatex",
+            "command": "lualatex",
+            "args": [
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-interaction=nonstopmode",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "latexmk-xe",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-interaction=nonstopmode",
+                "%DOCFILE%"
+            ]
+        },
+        {
+            "name": "latexmk-lua",
+            "command": "latexmk",
+            "args": [
+                "-lualatex",
+                "-interaction=nonstopmode",
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "xelatex",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "lualatex",
+            "tools": [
+                "lualatex"
+            ]
+        },
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "latexmk(xe)",
+            "tools": [
+                "latexmk-xe"
+            ]
+        },
+        {
+            "name": "latexmk(lua)",
+            "tools": [
+                "latexmk-lua"
+            ]
+        }
+    ]
+}

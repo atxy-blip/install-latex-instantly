@@ -1080,7 +1080,7 @@
 	%xetex,
 	%pagebackref=true,
 	%hyperfootnotes=false, % We already use footmisc
-	bookmarksdepth=section,
+	bookmarksdepth=subsubsection,
 	bookmarksopen=true, % Expand the bookmarks as soon as the pdf file is opened
 	%bookmarksopenlevel=4,
 	linktoc=all, % Toc entries and numbers links to pages
@@ -1256,64 +1256,58 @@
 %----------------------------------------------------------------------------------------
 
 % Listings code
-\RequirePackage{listings} % Code
+\RequirePackage{listings}
 
-% Configure the listings
-\definecolor{listingkeywords}{rgb}{0.0, 0.5, 0.0}
-\definecolor{listingidentifiers}{rgb}{0, 0, 0}
-\definecolor{listingcomments}{rgb}{0.25, 0.5, 0.5}
-\definecolor{listingstrings}{rgb}{0.73, 0.13, 0.13}
-\definecolor{listingnumbers}{rgb}{0.25, 0.25, 0.25}
-% Define a fancy style
-\lstdefinestyle{kaolst}{
-	aboveskip=0.7\topskip,
-	belowskip=0.1\topskip,
-	basicstyle=\small\ttfamily,
-	commentstyle=\color{listingcomments}\itshape,
-	keywordstyle=\color{listingkeywords}\bfseries,
-	numberstyle=\scriptsize\color{listingnumbers}\ttfamily,
-	stringstyle=\color{listingstrings},
-	identifierstyle=\color{listingidentifiers},
-	backgroundcolor=\color{White},
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=t,
-	keepspaces=true,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	numbers=left,
-	numbersep=1em,
-	%frame=lines,
-	frame=l,
-	framerule=.7pt,
-	tabsize=4,
-	defaultdialect=[LaTeX]Tex,
-}
-% Define a plain style as well
-\lstdefinestyle{kaolstplain}{
-	aboveskip=0.6\topskip,
-	belowskip=-0.1\topskip,
-	basicstyle=\small\ttfamily,
-	commentstyle=\color{listingcomments}\itshape,
-	keywordstyle=\color{listingkeywords}\bfseries,
-	numberstyle=\scriptsize\color{listingnumbers}\ttfamily,
-	stringstyle=\color{listingstrings},
-	identifierstyle=\color{listingidentifiers},
-	backgroundcolor=\color{White},
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=b,
-	keepspaces=true,
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	numbers=none,
-	frame=none,
-	tabsize=4,
-	defaultdialect=[LaTeX]Tex,
-}
-\lstset{style=kaolst}% Use the fancy style
+\lstdefinestyle{style@base}
+  {
+    basewidth       = 0.5 em,
+    gobble          = 1,
+    lineskip        = 3 pt,
+    frame           = l,
+    framerule       = 1 pt,
+    framesep        = 0 pt,
+    xleftmargin     = 2 em,
+    xrightmargin    = 3 em,
+    escapeinside    = {(*}{*)},
+    breaklines      = true,
+    basicstyle      = \small\ttfamily,
+    keywordstyle    = \bfseries\color{njuviolet},
+    commentstyle    = \itshape\color{white!50!gray},
+    stringstyle     = \color{nju-chem-red},
+    backgroundcolor = \color{white!95!gray}
+  }
+\lstdefinestyle{style@shell}
+  {
+    style      = style@base,
+    rulecolor  = \color{njumagenta},
+    language   = bash,
+    alsoletter = {-},
+    emphstyle  = \color{nju-cs-green}
+  }
+\lstdefinestyle{style@latex}
+  {
+    style      = style@base,
+    rulecolor  = \color{njublue},
+    language   = [LaTeX]TeX,
+    alsoletter = {*, -},
+    texcsstyle = *\color{njuviolet},
+    emphstyle  = [1]\color{nju-ai-orange},
+    emphstyle  = [2]\color{nju-cs-green}
+  }
+\lstdefinestyle{style@text}
+  {
+    style      = style@base,
+    rulecolor  = \color{njuyellow},
+    alsoletter = {-},
+    emphstyle  = \color{nju-cs-green}
+  }
+\lstnewenvironment{shellexample}[1][]{%
+  \lstset{style=style@shell, #1}}{}
+\lstnewenvironment{latexexample}[1][]{%
+  \lstset{style=style@latex, #1}}{}
+\lstnewenvironment{textexample}[1][]{%
+  \lstset{style=style@text, #1}}{}
+\lstset{style=style@base}
 
 %----------------------------------------------------------------------------------------
 %	TOC
@@ -1322,10 +1316,7 @@
 % Adjust the positions of margintoc and marginnotes
 \setlength{\mtocshift}{-0.6cm}
 \renewcommand{\marginnotevadjust}{-4pt}
-
-% Do not add lists to the TOC
-% \PassOptionsToClass{toc=nolistof}{\@baseclass}
-% \unsettoc{toc}{totoc}
+\ctexset{tocdepth=3}
 
 %----------------------------------------------------------------------------------------
 %	NUMBERING
