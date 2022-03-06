@@ -1,0 +1,77 @@
+\section{基础知识}
+\label{sec:intro}
+
+\lstMakeShortInline[
+  style=kaolst,
+  language=bash,
+  columns=fixed]|
+
+\begin{widepar}
+为了保证本指南之实践结果的可重复性，本节列举了一部分很有可能涉及的基础知识。当然，你大可以\emph{直接跳过}这一部分，等到有需要时再来查询。
+\end{widepar}
+
+\subsection{设备}
+
+成功运行 \TeX{} 排版系统的关键在于接触到一台计算机，并且尽可能满足以下条件：
+
+\begin{enumerate}
+  \item 安装有主流操作系统\sidenote{在本教程中特指以下三种：
+  \begin{itemize}
+    \item \faWindows{} Windows
+    \item \faLinux{} Linux
+    \item \faApple{} macOS
+  \end{itemize}}
+  \item 连接到\href{https://www.bilibili.com/video/BV1vW411Y7oh}{英特奈}，以\href{https://p.nju.edu.cn}{校园网}为佳
+  \item 使用看起来没有过时的浏览器
+  \item 剩余足够磁盘空间，至少为 8 GB
+\end{enumerate}
+
+如果你的计算机不满足至少一则上述要求，请考虑向 IT 侠互助协会求援。\sidenote{IT 侠是一个致力于无偿解决电脑问题的校内社团，参见 \url{https://itxia.club/}。}
+
+\subsection{命令行}
+
+\TeX{} 本身是命令行程序。尽管编辑器对此进行了包装，但编译文档实际是通过命令行指令进行的。了解命令行操作有助于排查错误，在下文的安装测试中也会用到。
+
+命令行操作及文件名中，请尽量不要用中文，避免空格、特殊符号。
+
+\subsubsection{打开终端}
+
+针对不同操作系统，可以使用如下办法打开终端\sidenote{顿号前后的操作是等价的}：
+
+\begin{description}
+  \item[\faWindows{}] 右键开始菜单\sidenote{可能显示为“命令提示符”或者“Windows Powershell”}、空白处 \kbd{Shift} + 右键、\kbd{Windows} + \kbd{R} \& |cmd|
+  \item[\faLinux{}] \kbd{Ctrl} + \kbd{Alt} + \kbd{T}
+  \item[\faApple{}] \kbd{⌘} + \kbd{Space} 搜索 Terminal、可在 Finder 中添加服务
+\end{description}
+
+\subsubsection{常用命令}
+
+\begin{description}
+  \item[文件管理] |cd|、|ls/dir|、|rm/del|、|clear/cls|
+  \item[\LaTeX{} 相关] |pdflatex|、|xelatex|、|latexmk|、|texdoc|
+  \item[命令选项] |-h|、|--help|、|/?|
+\end{description}
+
+\subsubsection{其他快捷键}
+
+\begin{itemize}
+  \item 复制粘贴：\kbd{Ctrl}/\kbd{⌘} + \kbd{C}/\kbd{V}、\kbd{Ctrl}/\kbd{Shift} + \kbd{Ins}
+  \item 路径连接符：斜线\sidenote{UNIX 操作系统}（|/|）或反斜线\sidenote{Windows 特色}（|\|）
+  \item 换行符：LF（\lstinline{\n}）或 CRLF（\lstinline{\r\n}）
+  \item 结束进程：\kbd{Ctrl} + \kbd{C}
+\end{itemize}
+
+\lstDeleteShortInline|
+
+\subsection{编码}
+
+一般地，在任何场合使用（不带 BOM 的）UTF-8 编码均是最优选择。\sidenote{你可曾感受过打开文件一团乱码的恐惧？}
+
+\subsection{是盗版吗？}
+
+一些比较谨慎的同学，可能会问出下面的问题：
+\begin{quote}
+  \kaishu 学校有没有购买相关软件的正版版权？
+\end{quote}
+
+请放心，本指南涉及的服务和软件完全免费，其中相当一部分属于自由软件的范畴。同时，也欢迎你来到 \TeX{} 的开源社区！

@@ -1,13 +1,44 @@
-\ProvidesPackage{kao}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% kaobook
+% LaTeX Class
+% Version 0.9.8 (2021/08/23)
+%
+% This template originates from:
+% https://www.LaTeXTemplates.com
+%
+% For the latest template development version and to make contributions:
+% https://github.com/fmarotta/kaobook
+%
+% Authors:
+% Federico Marotta (federicomarotta@mail.com)
+% Based on the doctoral thesis of Ken Arroyo Ohori (https://3d.bk.tudelft.nl/ken/en)
+% and on the Tufte-LaTeX class.
+% Modified for LaTeX Templates by Vel (vel@latextemplates.com)
+%
+% License:
+% LPPL (see included MANIFEST.md file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 你真的想阅读魔改的 kaohandt 屎山源码嘛？
 
 %----------------------------------------------------------------------------------------
-%	KAO-SPECIFIC OPTIONS
+%	CLASS CONFIGURATION
 %----------------------------------------------------------------------------------------
 
-% \DefineFamily{kao}% Define the family name
-% \DefineFamilyMember{kao}% Add a member to the family
-% \DefineFamilyKey{kao}{secnumdepth}[1]{\setcounter{secnumdepth}{#1}\FamilyKeyStateProcessed}% Define a key and a default value
-% \FamilyProcessOptions{kao}% Process the options
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{guidehandt}[2022/03/06 v0.1.0 guidehandt modified from kaohandt by at-xy]
+\newcommand{\@baseclass}{ctexart} % Base class name
+
+% Set the default options
+\PassOptionsToClass{zihao=-4,a4paper,oneside,linespread=1.3}{\@baseclass}
+
+% Pass through any other options to the base class
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{\@baseclass}}
+
+\ProcessOptions\relax % Process the options
+
+\LoadClass{\@baseclass} % Load the base class
 
 %----------------------------------------------------------------------------------------
 %	USEFUL PACKAGES AND COMMANDS
@@ -57,6 +88,38 @@
 
 % Make a bookmark to the title page
 \pretocmd{\maketitle}{\pdfbookmark[1]{\@plaintitle}{title}}{}{}%
+
+\DeclareRobustCommand*{\giturl}[1]{\gdef\my@giturl{#1}}
+\newcommand\@giturl[1]{\href{http://#1}{\texttt{#1}}}
+
+\ExplSyntaxOn
+\cs_new_protected:Npn \__kao_spread_box:nnn #1#2#3
+  {
+    \mode_leave_vertical:
+    \hbox_to_wd:nn { #1 }
+      { #2 \tl_map_inline:xn { #3 } { ##1 \hfil } \unskip }
+  }
+\cs_generate_variant:Nn \__kao_spread_box:nnn { nnV }
+\RenewDocumentCommand \maketitle { }
+  {
+	\group_begin:
+	\center
+    \__kao_spread_box:nnV { 13cm } { \sffamily\bfseries\zihao{-2} }
+		\@title
+	\skip_vertical:n { 4ex }
+    \zihao{4}\@author
+	\skip_vertical:n { 0.5ex }
+    \@date
+	\skip_vertical:n { -1ex }
+	\color{njuviolet}\rule{10em}{1pt}
+	\skip_vertical:n { 0ex }
+  \exp_args:NV \@giturl \my@giturl
+	\endcenter
+  \@thanks
+	\group_end:
+	\par
+  }
+\ExplSyntaxOff
 
 %----------------------------------------------------------------------------------------
 %	PAGE LAYOUT
@@ -167,37 +230,6 @@
 	\recalchead%
 }
 
-% Header style with chapter number, chapter title, and page in the header (used throughout the document)
-\renewpagestyle{scrheadings}{%
-	{\smash{\hspace{-\headmarginparwidth}\hspace{-\headmarginparsep}\makebox[\headtotal][l]{%
-		\makebox[7\hscale][r]{\thepage}%
-		\makebox[3\hscale]{}\rule[-1mm]{0.5pt}{19\vscale-1mm}\makebox[3\hscale]{}%
-		\makebox[\headtextwidth][l]{\leftmark}}}}%
-	{\smash{\makebox[0pt][l]{\makebox[\headtotal][r]{%
-		\makebox[\headtextwidth][r]{\hfill\rightmark}%
-		\makebox[3\hscale]{}\rule[-1mm]{0.5pt}{19\vscale-1mm}\makebox[3\hscale]{}%
-		\makebox[7\hscale][l]{\thepage}}}}}%
-	{\smash{\makebox[0pt][l]{\makebox[\headtotal][r]{%
-		\makebox[\headtextwidth][r]{\hfill\rightmark}%
-		\makebox[3\hscale]{}\rule[-1mm]{0.5pt}{19\vscale-1mm}\makebox[3\hscale]{}%
-		\makebox[7\hscale][l]{\thepage}}}}}%
-}{%
-	{}%
-	{}%
-	{}%
-}
-
-% Header style with neither header nor footer (used for special pages)
-\renewpagestyle{plain.scrheadings}{%
-	{}%
-	{}%
-	{}%
-}{%
-	{}%
-	{}%
-	{}%
-}
-
 % Header style with an empty header and the page number in the footer
 \newpagestyle{pagenum.scrheadings}{%
 	{}%
@@ -209,26 +241,8 @@
 	{\makebox[\textwidth][l]{\thepage}}%
 }
 
-% Header style with an empty header and the page number in the footer
-\newpagestyle{centeredpagenum.scrheadings}{%
-	{}%
-	{}%
-	{}%
-}{%
-	{\hspace{-\headmarginparwidth}\hspace{-\headmarginparsep}\makebox[\headtotal][l]{\hfill\thepage\hfill}}
-	{\makebox[0pt][l]{\makebox[\headtotal][r]{\hfill\thepage\hfill}}}%
-	{\makebox[0pt][l]{\makebox[\headtotal][r]{\hfill\thepage\hfill}}}%
-}
-
-% Command to print a blank page
-\newcommand\blankpage{%
-	\null%
-	\thispagestyle{empty}%
-	\newpage%
-}
-
 % Set the default page style
-\pagestyle{plain.scrheadings}
+\pagestyle{pagenum.scrheadings}
 
 %----------------------------------------------------------------------------------------
 %	PARAGRAPH FORMATTING
@@ -237,7 +251,6 @@
 \RequirePackage{ragged2e} % Required to achieve better ragged paragraphs
 \RequirePackage{setspace} % Required to easily set the space between lines
 \RequirePackage{hyphenat} % Hyphenation for special fonts
-% \RequirePackage{microtype} % Improves character and word spacing
 \RequirePackage{needspace} % Required to prevent page break right after a sectioning command
 % \RequirePackage{xspace} % Better print trailing whitespace
 
@@ -303,8 +316,10 @@
 }
 
 % Environment for a wide paragraph
+% \hskip 2em 实际比两个字符多一点点空白，一般看不出来，有空再修复
 \NewDocumentEnvironment{widepar}{}{
 	\begin{addmargin}[0cm]{-\marginparwidth-\marginparsep}%
+    \hskip 2em%
 }{%
 	\end{addmargin}%
 }
@@ -1041,10 +1056,14 @@
 	\RequirePackage{morewrites} % Fix some errors related to floats (not necessary with LuaLaTeX
 \fi
 
-% When using the Palatino (newpxtext) font, it is better to use a
-% slightly larger stretch.
-%\setstretch{1.10}
-% \linespread{1.07} % Give Palatino more leading (space between lines)
+\setCJKmainfont{Source Han Serif SC}[
+  UprightFont     = * SemiBold,
+  BoldFont        = * Heavy,
+  ItalicFont      = * SemiBold,
+  BoldItalicFont  = * SemiBold,
+  RawFeature      = +fwid]
+\setCJKsansfont{Sarasa Gothic SC}
+\setCJKmonofont{Sarasa Mono SC}
 
 %----------------------------------------------------------------------------------------
 %	HYPERREFERENCES
@@ -1295,3 +1314,24 @@
 	defaultdialect=[LaTeX]Tex,
 }
 \lstset{style=kaolst}% Use the fancy style
+
+%----------------------------------------------------------------------------------------
+%	TOC
+%----------------------------------------------------------------------------------------
+
+% Adjust the positions of margintoc and marginnotes
+\setlength{\mtocshift}{-0.6cm}
+\renewcommand{\marginnotevadjust}{-4pt}
+
+% Do not add lists to the TOC
+% \PassOptionsToClass{toc=nolistof}{\@baseclass}
+% \unsettoc{toc}{totoc}
+
+%----------------------------------------------------------------------------------------
+%	NUMBERING
+%----------------------------------------------------------------------------------------
+
+%\setcounter{secnumdepth}{\kao@secnumdepth} % Set section numbering depth
+
+% \counterwithin*{sidenote}{section} % Uncomment to reset the sidenote counter at each section
+%\counterwithout{sidenote}{section} % Uncomment to have one sidenote counter for the whole document

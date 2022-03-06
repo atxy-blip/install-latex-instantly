@@ -1,0 +1,59 @@
+\maketitle
+
+\bigskip
+\medskip
+
+自 1978 年高德纳教授发布 \TeX{} 以来，\TeX{} 排版系统已经向出版界展示了其强大的实用功能，并坐上了学术论文事实出版标准的宝座。这当然意味着，掌握一手 \LaTeX{} 写作技术，将是科研新星发顶刊必不可少的要素！
+
+然而，这篇指南\emph{无意}教你 \LaTeX{} 技术。原因很简单：\emph{软件基础决定文档写作}。在浩如烟海的教程中，本文至少有两点脱颖而出：其一，字体比较大；其二，唯一宗旨是又快又好地搞定编译环境，而且仅限在南京大学校园内。
+
+\bigskip
+
+话不多说，先问自己两个问题！如果你决定好了，就\emph{点击相应卡片}跳转到合适的教程。
+
+\medskip
+
+% https://newbedev.com/making-tikz-nodes-hyperlinkable/
+\tikzset{
+    hyperlink node/.style={
+        alias=sourcenode,
+        append after command={
+            let \p1 = (sourcenode.north west),
+                \p2=(sourcenode.south east),
+                \n1={\x2-\x1},
+                \n2={\y1-\y2} in
+            node [inner sep=0pt, outer sep=0pt,anchor=north west,at=(\p1)] {\hyperref[sec:#1]{\XeTeXLinkBox{\phantom{\rule{\n1}{\n2}}}}}
+        }
+    }
+}
+
+\tikzstyle{decision} = [diamond, aspect=1.5, fill=njuviolet!20,
+    text width=4.4em, text badly centered, minimum height=3em, minimum width=5em, inner sep=0pt]
+\tikzstyle{block} = [rectangle, fill=njublue!20,
+    text width=6em, text centered, rounded corners, minimum height=3em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+\begin{center}
+\begin{tikzpicture}[node distance = 2cm, auto]
+
+    \node [decision] (local-dist) {要不要在本地安装？};
+    \node [decision, below of=local-dist, node distance=3.5cm] (which-dist) {装哪个\\版本呢？};
+    \node [block, below of=which-dist, node distance=3.5cm, hyperlink node=mik] (mik) {\large \hologo{MiKTeX}};
+    \node [block, left of=mik, node distance=4cm, hyperlink node=online] (online) {\large 在线服务};
+    \node [block, right of=mik, node distance=4cm, hyperlink node=tl] (tl) {\large \hologo{TeX}\,Live};
+
+    \path [line] (local-dist) -- node {\small\hls 好耶} (which-dist);
+    \path [line] (local-dist) -| (online);
+    \path [line] (which-dist) -- (mik);
+    \path [line] (which-dist) -| (tl);
+    \node [left=0.7cm of local-dist, fill=white] {\small\hls 丑拒};
+    \node [above=0.7cm of online, fill=white] {\small\hls 我就喜欢速战速决};
+    \node [above=0.7cm of mik, fill=white] {\small\hls 轻量一点比较好};
+    \node [above=0.7cm of tl, fill=white] {\small\hls 追求又大又全的体验};
+\end{tikzpicture}
+\end{center}
+
+本文源码已开放在校内 Git 平台。如果你希望在其他位置使用这篇指南的内容，请参考文末的版权声明。
+
+\clearpage

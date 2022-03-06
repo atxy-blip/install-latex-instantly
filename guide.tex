@@ -1,115 +1,50 @@
-\documentclass{kaohandt}
+\documentclass{guidehandt}
 
-\setCJKmainfont{Source Han Serif SC}[
-  UprightFont     = * SemiBold,
-  BoldFont        = * Heavy,
-  ItalicFont      = * SemiBold,
-  BoldItalicFont  = * SemiBold,
-  RawFeature      = +fwid]
-\setCJKsansfont{Sarasa Gothic SC}
-% [
-%   UprightFont     = * Regular,
-%   BoldFont        = * SemiBold,
-%   ItalicFont      = * Italic,
-%   BoldItalicFont  = * SemiBold Italic]
-\setCJKmonofont{Sarasa Mono SC}
+\newCJKfontfamily\hls{HYZiYanHuanLeSongW.ttf}[Path=./fonts/]
+\newfontfamily\xkcd{xkcd-script.ttf}[Path=./fonts/, Ligatures=TeX]
+\newfontfamily\LibertinusKey{LibertinusKeyboard-Regular.otf}
 
-\usepackage{hologo}
+\newcommand\kbd[1]{{\LibertinusKey#1}}
 
-% Load packages for testing
+\usepackage{hologo,fontawesome5}
 \usepackage{blindtext}
 \usepackage{zhlipsum}
 \usepackage{njuvisual}
-%\usepackage{showframe} % Uncomment to show boxes around the text area, margin, header and footer
-%\usepackage{showlabels} % Uncomment to output the content of \label commands to the document where they are used
-
-\graphicspath{{images/}{./}} % Paths where images are looked for
-
-% Load mathematical packages for theorems and related environments.
-% \usepackage{kaotheorems}
-
-\usepackage{kaobiblio}
-% \addbibresource{report-template.bib} % Bibliography file
-
 \usepackage{url}
-\newcommand\myurl[1]{\href{http://#1}{\texttt{#1}}}
-\ExplSyntaxOn
-\cs_new_protected:Npn \__kao_spread_box:nnn #1#2#3
-  {
-    \mode_leave_vertical:
-    \hbox_to_wd:nn { #1 }
-      { #2 \tl_map_inline:xn { #3 } { ##1 \hfil } \unskip }
-  }
-\cs_generate_variant:Nn \__kao_spread_box:nnn { nnV }
-\makeatletter
-\RenewDocumentCommand \maketitle { }
-  {
-	\null
-	\skip_vertical:n { 0.5cm }
-	\group_begin:
-	\center
-    \__kao_spread_box:nnV { 13cm } { \sffamily\bfseries\zihao{-2} }
-		\@title
-	\skip_vertical:n { 4ex }
-    \zihao{4}\@author
-	\skip_vertical:n { 0.5ex }
-    \@date
-	\skip_vertical:n { -1ex }
-	\rule{8em}{1pt}
-	\skip_vertical:n { 0ex }
-  \myurl{git.nju.edu.cn/atXYblip/install-latex-instantly}
-	\endcenter
-  \@thanks
-	\group_end:
-	\par
-  }
-\makeatother
-\ExplSyntaxOff
+\usepackage{ulem}
+%\usepackage{showframe,showlabels}
+
+\graphicspath{{images/}}
+\DeclareGraphicsExtensions{.pdf, .eps, .jpg, .png}
+
+% \usepackage{kaobiblio}
+% % \addbibresource{report-template.bib} % Bibliography file
+
+\usetikzlibrary{shapes,arrows,calc,chains,external}
 
 \begin{document}
-\pagestyle{plain}
-\pagenumbering{roman}
 
 \title{当代 {\TeX{}} 发行版超快速安装指南}
-
-\author{熊\hspace{1em}煜\thanks{化学化工学院 2018 级本科生}}
-
+\author{熊\hspace{1em}煜\thanks{南京大学化学化工学院 2018 级本科生}}
 \date{\today}
+\giturl{git.nju.edu.cn/atXYblip/install-latex-instantly}
 
-%	TITLE AND ABSTRACT
-\maketitle
-\bigskip
-\bigskip
-\zhlipsum[1]
-\tableofcontents
-
-\clearpage
+% \input{sections/cover.tex}
 
 \pagelayout{margin}
 
-\section{Introduction}
+\ctexset{
+    section/format = \bfseries\sffamily\zihao{4},
+    subsection/format = \bfseries\sffamily\zihao{-4}
+}
 
-Write here your introduction, and make sure to
-reference your sources.
+\input{sections/intro.tex}
+\input{sections/online.tex}
+\input{sections/mik.tex}
+\input{sections/tl.tex}
 
-\blindtext\sidenote{\blindtext}
+\appendix
 
-\section{Methods}
-\sidenote{Jamsdfasdfljasl;fdj}
-\zhlipsum
-
-\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
-
-\section{Appendix}
-
-\blindtext
-
-
-%	BIBLIOGRAPHY
-
-
-% The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
-
-\printbibliography[title=Bibliography] % Set the title of the bibliography and print the references
+\input{sections/disclaim.tex}
 
 \end{document}
