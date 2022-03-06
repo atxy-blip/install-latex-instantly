@@ -25,7 +25,7 @@
 \begin{marginfigure}
 \centering
 \includegraphics[width=0.3\textwidth]{extension-icon}
-\caption{也可以直接点击“扩展”图标，长上面这样，}
+\caption{也可以直接点击“扩展”图标，长上面这样。}
 \end{marginfigure}
 
 \medskip
@@ -38,8 +38,27 @@
   \item LaTeX Workshop
 \end{itemize}
 
+\begin{marginfigure}
+  \centering
+  \includegraphics[width=0.3\textwidth]{open-json}
+  \caption{也可以使用快捷键 \kbd{Ctrl} + \kbd{,} 打开设置，点击右上角的这个图标。}
+  \end{marginfigure}
+
+最后需要进行插件配置。使用快捷键 \kbd{Ctrl} + \kbd{Shift} + \kbd{P} 打开命令列表，输入 “setting”，找到并点击“首选项：打开设置（json）”。
+
+\medskip
+\href{https://git.nju.edu.cn/atXYblip/install-latex-instantly/-/raw/main/.vscode/settings.json}{\faFile*[regular] \texttt{settings.json}}
+\medskip
+
+将上面这个文件\sidenote{在校园网内才能打开。}内容复制到刚刚打开的文件里，保存并重启应用程序。设置完成！
 
 \subsection{第一个项目}
+
+\begin{widepar}
+最后的最后，我们终于可以开始着手构建第一个 \LaTeX{} 文档。找一个你喜欢的地方新建文件夹，然后右键选择这个文件夹，点击“通过 Code 打开”。
+
+接着，在左侧的文件列表中点击鼠标右键，新建文件，命名为 \texttt{main.tex}。在这个文件里输入下面的内容：
+\end{widepar}
 
 \begin{latexexample}
   \documentclass{ctexart}
@@ -47,3 +66,9 @@
   你好，\LaTeX{}!
   \end{document}
 \end{latexexample}
+
+\begin{widepar}
+使用快捷键 \kbd{Ctrl} + \kbd{Alt} + \kbd{B} 编译
+
+使用快捷键 \kbd{Ctrl} + \kbd{Alt} + \kbd{V} 查看 PDF
+\end{widepar}

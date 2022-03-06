@@ -248,6 +248,11 @@
 %	PARAGRAPH FORMATTING
 %----------------------------------------------------------------------------------------
 
+\ctexset{
+  section/format = \bfseries\sffamily\zihao{4},
+  subsection/format = \bfseries\sffamily\zihao{-4}
+}
+
 \RequirePackage{ragged2e} % Required to achieve better ragged paragraphs
 \RequirePackage{setspace} % Required to easily set the space between lines
 \RequirePackage{hyphenat} % Hyphenation for special fonts

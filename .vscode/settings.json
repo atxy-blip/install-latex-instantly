@@ -61,9 +61,21 @@
     ],
     "latex-workshop.latex.recipes": [
         {
-            "name": "pdflatex",
+            "name": "latexmk(xe)",
             "tools": [
-                "pdflatex"
+                "latexmk-xe"
+            ]
+        },
+        {
+            "name": "latexmk(lua)",
+            "tools": [
+                "latexmk-lua"
+            ]
+        },
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
             ]
         },
         {
@@ -79,21 +91,9 @@
             ]
         },
         {
-            "name": "latexmk",
+            "name": "pdflatex",
             "tools": [
-                "latexmk"
-            ]
-        },
-        {
-            "name": "latexmk(xe)",
-            "tools": [
-                "latexmk-xe"
-            ]
-        },
-        {
-            "name": "latexmk(lua)",
-            "tools": [
-                "latexmk-lua"
+                "pdflatex"
             ]
         }
     ]
