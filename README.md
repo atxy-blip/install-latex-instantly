@@ -2,7 +2,7 @@
 
 2022 年 3 月写作的快速安装教程。
 
-点击下载编译好的 PDF 文档：[install-guide-20220307.pdf]()
+点击下载编译好的 PDF 文档：[install-guide-20220307.pdf](https://git.nju.edu.cn/atXYblip/install-latex-instantly/uploads/adb11cf89dc6e91a5bf07341bae4f3e5/install-guide-20220307.pdf)
 
 ## 意犹未尽？
 
