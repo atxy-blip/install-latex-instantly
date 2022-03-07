@@ -1285,7 +1285,7 @@
   {
     style      = style@base,
     rulecolor  = \color{njumagenta},
-    language   = bash,
+    % language   = bash,
     alsoletter = {-},
     emphstyle  = \color{nju-cs-green}
   }
