@@ -20,7 +20,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 你真的想阅读魔改的 kaohandt 屎山源码嘛？
+% 你真的想阅读魔改后的 kaohandt 屎山源码嘛？
 
 %----------------------------------------------------------------------------------------
 %	CLASS CONFIGURATION
@@ -827,202 +827,6 @@
 }
 
 %----------------------------------------------------------------------------------------
-%	TOC, LOF & LOT
-%----------------------------------------------------------------------------------------
-
-% \RequirePackage{tocbasic} % Required to customise the TOC
-
-% % Show an entry for the TOC in the TOC
-% \setuptoc{toc}{totoc}
-
-% % Choose the levels in table of contents
-% \setcounter{tocdepth}{3}
-
-% % Customise the list of listings
-% \renewcommand{\lstlistlistingname}{List of Listings}% Change the title
-% \newcommand{\lstlistingtocdepth}{\sectiontocdepth}% Set the depth
-% \newcommand{\listoflistings}{\lstlistoflistings}% Provide the alias \listoflistings
-% \newcommand{\listoflstlistings}{\lstlistoflistings}% Provide the alias \listoflstlistings
-
-% % Define the style for toc entries
-% \@ifpackagelater{scrbase}{2019/10/11}{%
-% 	\DeclareTOCStyleEntries[indent=0em,numwidth=2em,dynnumwidth=yes,pagenumberwidth=2.1em]{tocline}{figure,table,lstlisting}%
-% 	\DeclareTOCStyleEntries[dynnumwidth=yes]{tocline}{subsubsection,subsection,section,chapter,part}%
-% 	\DeclareTOCStyleEntries[pagenumberwidth=2.5em]{tocline}{chapter,part}%
-% 	\DeclareTOCStyleEntries[pagenumberwidth=2.1em]{tocline}{subsubsection,subsection,section}%
-% }{%
-% 	\DeclareTOCStyleEntries[indent=0em,numwidth=2em,dynnumwidth=yes]{tocline}{figure,table,lstlisting}%
-% 	\DeclareTOCStyleEntries[dynnumwidth=yes]{tocline}{subsubsection,subsection,section,chapter,part}%
-% }
-
-% Define the names for the headings
-% \renewcaptionname{english}{\contentsname}{Detailed Contents}
-% \renewcaptionname{english}{\listfigurename}{Figures}
-% \renewcaptionname{english}{\listtablename}{Tables}
-% \newcaptionname{english}{\listtheoremname}{Theorems}
-
-%----------------------------------------------------------------------------------------
-%	MARGIN TOC
-%----------------------------------------------------------------------------------------
-
-\RequirePackage{etoc} % Required to insert local tables of contents
-
-\newcounter{margintocdepth} % Set the depth of the margintoc
-\setcounter{margintocdepth}{6} % By default to subsections
-
-\newlength{\mtocshift} % Length of the vertical offset used for margin tocs
-\setlength{\mtocshift}{1\vscale}% \mtocshift is overridden by \setchapterstyle
-
-% Optional title for margintoc (by hCarlFelix,
-% https://github.com/fmarotta/kaobook/issues/101)
-% We want to create an additional entries in the toc which is to be used for the margintoc
-% We define these as mtocsection and mtocsubsection for section and subsection`
-\newcommand{\mtocsection}[1]{
-	\etoctoccontentsline{mtocsection}{%
-		\ifnum\value{secnumdepth}>0 \protect\numberline{\thesection}%
-		\else \protect\nonumberline%
-		\fi #1}%
-}
-\newcommand{\mtocsubsection}[1]{
-	\etoctoccontentsline{mtocsubsection}{%
-		\ifnum\value{secnumdepth}>1 \protect\numberline{\thesubsection}%
-		\else \protect\nonumberline%
-		\fi #1}%
-}
-
-% Next, we redefine \section and \subsection so that they accept an additional parameter
-% \section[alternative-title-for-toc]{title-as-written-in-text}[alternative-title-for-margintoc]
-
-% Adapted from Frank Mittelbach's answer at Stackexchange
-% https://tex.stackexchange.com/a/109560/226693
-\let\oldsection\section	% save the old command
-\let\oldsubsection\subsection	% save the old command
-
-\RenewDocumentCommand\section{s o m o}{%
-	\IfBooleanTF{#1}{%
-		\oldsection*{#3}
-		\IfNoValueF{#2}{% if TOC arg is given create a TOC entry
-			\addxcontentsline{toc}{section}[\thesection]{#2}%
-		}%
-	}{% no star given
-		\IfNoValueTF{#2}{%
-			\oldsection{#3}%
-		}{% no TOC arg
-			\oldsection[#2]{#3}%
-		}%
-		\IfNoValueTF{#4}{% optional label given, if not we do nothing
-			% \mtocsection{#3}%
-			\IfNoValueTF{#2}{%
-				\mtocsection{#3}% when no optional toc title, use main title
-			}{% no TOC arg
-				\mtocsection{#2}% when toc optional title is given, use it
-			}%
-		}{%
-			\mtocsection{#4}%
-		}%
-	}%
-}
-
-\RenewDocumentCommand\subsection{s o m o}{%
-	\IfBooleanTF{#1}{%
-		\oldsubsection*{#3}%
-		\IfNoValueF{#2}{% if TOC arg is given create a TOC entry
-			\addxcontentsline{toc}{subsection}[\thesubsection]{#2}%
-		}%
-	}{% no star given
-		\IfNoValueTF{#2}{%
-			\oldsubsection{#3}%
-		}{% no TOC arg
-			\oldsubsection[#2]{#3}%
-		}%
-		\IfNoValueTF{#4}{% optional label given, if not we do nothing
-			\IfNoValueTF{#2}{%
-				\mtocsubsection{#3}% when no optional toc title, use main title
-			}{% no TOC arg
-				\mtocsubsection{#2}% when toc optional title is given, use it
-			}%
-		}{%
-			\mtocsubsection{#4}%
-		}%
-	}%
-}
-
-\etocsetlevel{mtocsection}{6}% dummy sectioning level
-\etocsetlevel{mtocsubsection}{6}% dummy sectioning level
-
-% Command to print a table of contents in the margin
-\NewDocumentCommand{\margintoc}{O{\mtocshift}}{ % The first parameter is the vertical offset; by default it is \mtocshift
-	\begingroup%
-		% Move regular section and subsection to level 6 so that they won't be included and instead set let the mtoc versions take their place.
-		% Adapted from https://tex.stackexchange.com/a/133559/226693
-		\etocsetlevel{section}{6}
-		\etocsetlevel{subsection}{6}
-		\etocsetlevel{mtocsection}{1}
-		\etocsetlevel{mtocsubsection}{2}
-
-		% Define default widths
-		\def\margintocnumwidth{-.8mm}%
-		\def\margintocpagenumwidth{8pt}%
-		\setlength{\RaggedRightParfillskip}{0pt}
-
-		% Dry run to get the needed widths
-		% \etocsetstyle{mtocsection}%
-		% 	{}%
-		% 	% {\setbox0\hbox{{\usekomafont{section}\small\etocthenumber\kern.8mm}}%%
-		% 	% \setbox1\hbox{{\usekomafont{section}\small\etocthepage}}}%
-		% 	{\setbox0\hbox{{\small\etocthenumber\kern.8mm}}%%
-		% 	 \setbox1\hbox{{\small\etocthepage}}}%
-		% 	{\ifdim\wd0>\margintocnumwidth \edef\margintocnumwidth{\the\wd0} \fi%%
-		% 	 \ifdim\wd1>\margintocpagenumwidth \edef\margintocpagenumwidth{\the\wd1} \fi}%
-		% 	{}%
-		% \etocsetstyle{mtocsubsection}%
-		% 	{}%
-		% 	{\setbox0\hbox{{\small\mdseries\etocthenumber\kern.8mm}}%
-		% 	\setbox1\hbox{{\small\mdseries\etocthepage}}
-		% 	% {\setbox0\hbox{{\usekomafont{section}\small\mdseries\etocthenumber\kern.8mm}}%
-		% 	%  \setbox1\hbox{{\usekomafont{section}\small\mdseries\etocthepage}}}%
-		% 	{\ifdim\wd0>\margintocnumwidth \edef\margintocnumwidth{\the\wd0} \fi%
-		% 	 \ifdim\wd1>\margintocpagenumwidth \edef\margintocpagenumwidth{\the\wd1} \fi}%
-		% 	{}%
-		% \etocsetstyle{subsubsection}%
-		% 	{}%
-		% 	{}%
-		% 	{}%
-		% 	{}%
-		% \etocsetstyle{paragraph}%
-		% 	{}%
-		% 	{}%
-		% 	{}%
-		% 	{}%
-		% \etocsettocstyle{}{%
-		% 	\global\let\margintocnumwidth\margintocnumwidth%
-		% 	\global\let\margintocpagenumwidth\margintocpagenumwidth%
-		% }%
-		\localtableofcontents%
-
-		% Set the style for section entries
-		\etocsetstyle{mtocsection}%
-		{\parindent 0pt \parskip 2.5pt \parfillskip 0pt \RaggedRight}%
-		{\leftskip \margintocnumwidth \rightskip \margintocpagenumwidth}%
-		{\makebox[0pt][r]{\makebox[\margintocnumwidth][l]{\etocnumber}}\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\rlap{\makebox[\margintocpagenumwidth][r]{\etocpage}}\par}%
-		{}%
-		% Set the style for subsection entries
-		\etocsetstyle{mtocsubsection}%
-		{\parindent 0pt \parskip 0pt \parfillskip 0pt \RaggedRight}%
-		{\leftskip \margintocnumwidth \rightskip \margintocpagenumwidth}%
-		{\makebox[0pt][r]{\makebox[\margintocnumwidth][l]{\mdseries\etocnumber}}{\mdseries\etocname\nobreak\leaders\hbox{\hbox to 1.5ex {\hss.\hss}}\hfill\rlap{\makebox[\margintocpagenumwidth][r]{\mdseries\etocpage}}}\par}%
-		{\parskip 2.5pt}%
-		% Set the global style of the toc
-		\etocsettocstyle{\small}{}%
-		% \etocsettocstyle{\usekomafont{section}\small}{}%
-		\etocsetnexttocdepth{\themargintocdepth}%
-		% Print the table of contents in the margin
-		\marginnote[#1]{\localtableofcontents}%
-		\FloatBarrier%
-	\endgroup%
-}
-
-%----------------------------------------------------------------------------------------
 %	ENCODING AND FONTS
 %----------------------------------------------------------------------------------------
 
@@ -1136,17 +940,6 @@
 %	COLOURS
 %----------------------------------------------------------------------------------------
 
-% Uncomment to have coloured headings
-%\addtokomafont{title}{\color{Maroon}}
-%\addtokomafont{part}{\color{Maroon}}
-%\addtokomafont{chapter}{\color{Maroon}}
-%\addtokomafont{section}{\color{Maroon}}
-%\addtokomafont{subsection}{\color{Maroon}}
-%\addtokomafont{subsubsection}{\color{Maroon}}
-%\addtokomafont{paragraph}{\color{Maroon}}
-%\addtokomafont{captionlabel}{\color{Blue}}
-%\addtokomafont{pagenumber}{\color{Maroon}}
-
 % Choose the default colors
 \hypersetup{
 	%anchorcolor=Red,
@@ -1251,11 +1044,6 @@
 \newcommand*{\fnum@floatingbox}{\floatingboxformat}% Use the environment title
 \newcommand*{\ext@floatingbox}{loi}% Choose the extension of the auxiliary file for this environment
 
-% \addtotoclist[float]{loi}% Keep track of 'kaofloating' environments for a "List of Insights"
-% \newcommand*{\listofloiname}{List of Insights}% Choose the title for the "List of Insights"
-% \newcommand*{\l@floatingbox}{\l@figure}% Format the LOI
-% \newcommand*{\listofinsights}{\listoftoc{loi}}% User-friendly command to print the LOI
-
 %----------------------------------------------------------------------------------------
 %	ADDITIONAL PACKAGES
 %----------------------------------------------------------------------------------------
@@ -1318,9 +1106,6 @@
 %	TOC
 %----------------------------------------------------------------------------------------
 
-% Adjust the positions of margintoc and marginnotes
-\setlength{\mtocshift}{-0.6cm}
-\renewcommand{\marginnotevadjust}{-4pt}
 \ctexset{tocdepth=3}
 
 %----------------------------------------------------------------------------------------
