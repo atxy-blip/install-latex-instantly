@@ -3,6 +3,12 @@
 
 \begin{widepar}
   终于到了验收成果的时候！这一节会对本地安装进行验证，并通过 VS Code 完成你的第一个项目。
+
+  阅读中请注意：
+  \begin{itemize}
+    \item \kbd{Shift} 为空心箭头，对应 Shift 按键。
+    \item macOS用户请将 \kbd{Ctrl} 换成 \kbd{⌘}，即 Command 按键。
+  \end{itemize}
 \end{widepar}
 
 \subsection{测试引擎}
@@ -27,9 +33,9 @@
 \caption{也可以直接点击“扩展”图标，长上面这样。}
 \end{marginfigure}
 
-\medskip
-\href{https://code.visualstudio.com/Download}{\faCloudDownload* VS Code 官网下载页}
-\medskip
+\begin{itemize}
+  \item \href{https://code.visualstudio.com/Download}{\faExternalLink* VS Code 官网下载页}
+\end{itemize}
 
 安装完成后，打开 Visual Studio Code 应用程序，使用快捷键 \kbd{Ctrl} + \kbd{Shift} + \kbd{X} 打开扩展列表，在应用商店中搜索并安装以下两个扩展：
 \begin{itemize}
@@ -41,13 +47,13 @@
   \centering
   \includegraphics[width=0.3\textwidth]{open-json}
   \caption{也可以使用快捷键 \kbd{Ctrl} + \kbd{,} 打开设置，点击右上角的这个图标。}
-  \end{marginfigure}
+\end{marginfigure}
 
 最后需要进行插件配置。使用快捷键 \kbd{Ctrl} + \kbd{Shift} + \kbd{P} 打开命令列表，输入 “setting”，找到并点击“首选项：打开设置（json）”。
 
-\medskip
-\href{https://git.nju.edu.cn/atXYblip/install-latex-instantly/-/raw/main/.vscode/settings.json}{\faFile*[regular] \texttt{settings.json}}
-\medskip
+\begin{itemize}
+  \item \href{https://git.nju.edu.cn/atXYblip/install-latex-instantly/-/raw/main/.vscode/settings.json}{\faFile*[regular] \texttt{settings.json}}
+\end{itemize}
 
 将上面这个文件\sidenote{在校园网内才能打开。}内容复制到刚刚打开的文件里，保存并重启应用程序。设置完成！
 
@@ -59,7 +65,7 @@
 接着，在左侧的文件列表中点击鼠标右键，新建文件，命名为 \texttt{main.tex}。在这个文件里输入下面的内容：
 \end{widepar}
 
-\begin{latexexample}
+\begin{latexexample}[emph={[1]ctexart,document}]
   \documentclass{ctexart}
   \begin{document}
   你好，\LaTeX{}!

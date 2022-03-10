@@ -6,7 +6,7 @@
   njuvisual,
   subcaption,
   url,
-  ulem
+  xeCJKfntef
 }
 %\usepackage{blindtext,zhlipsum,showframe,showlabels}
 
@@ -20,6 +20,7 @@
 \newfontfamily\LibertinusKey{LibertinusKeyboard-Regular.otf}
 
 \newcommand\kbd[1]{{\LibertinusKey#1}}
+\renewcommand\emph[1]{\CJKunderdot{#1}}
 
 \begin{document}
 
@@ -40,6 +41,6 @@
 
 \appendix
 
-\input{sections/copyright.tex}
+\input{sections/appendix.tex}
 
 \end{document}

@@ -36,9 +36,9 @@
 每年更新版本时会发布一个巨大无比的安装镜像，点击链接获取：
 \end{widepar}
 
-\medskip
-\href{https://mirrors.nju.edu.cn/CTAN/systems/texlive/Images/texlive2021-20210325.iso}{\faFile*[regular] \texttt{texlive2021-20210325.iso}}
-\medskip
+\begin{itemize}
+  \item \href{https://mirrors.nju.edu.cn/CTAN/systems/texlive/Images/texlive2021-20210325.iso}{\faFile*[regular] \texttt{texlive2021-20210325.iso}}
+\end{itemize}
 
 双击打开下载的 ISO 文件，Windows 会自动挂载到虚拟光驱\sidenote{也有可能 \texttt{.iso} 文件被当作压缩文件，这就要将其完整解压缩到一个路径不含中文的文件夹下面。}，弹出一个新的文件夹窗口。接着，需要在右键菜单中\emph{以管理员身份运行} \texttt{install-tl-windows.bat}，稍等片刻，会呈现如图~\ref{fig:install-tl-0} 所示的窗口。
 
@@ -54,11 +54,15 @@
 
 但如果你仍然闲着，可以把宏包都更新一遍，毕竟是去年 3 月份打包的。以管理员身份打开终端\sidenote{忘了怎么做？回去看看 \ref{subsec:terminal}。}，执行下面的命令：
 
-\begin{shellexample}[morekeywords={tlmgr,fmtutil}]
+\vspace*{-0.7cm}
+\begin{widepar}
+\begin{shellexample}[morekeywords={tlmgr,fmtutil-user},emph={option,update},
+  xleftmargin = 0.5 em, xrightmargin = 1 em]
   tlmgr option repository https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet
   tlmgr update --self --all
   fmtutil-user --all
 \end{shellexample}
+\end{widepar}
 
 升级操作也会持续挺久。再找点别的事情做吧。
 
@@ -69,9 +73,9 @@
 在线安装的优势在于所有宏包装上就是最新版。只需下载一个小巧的安装器：
 \end{widepar}
 
-\medskip
-\href{https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet/install-tl.zip}{\faFile*[regular] \texttt{install-tl.zip}}
-\medskip
+\begin{itemize}
+  \item \href{https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet/install-tl.zip}{\faFile*[regular] \texttt{install-tl.zip}}
+\end{itemize}
 
 完整解压缩到一个路径不含中文的文件夹下面，在右键菜单中\emph{以管理员身份运行} \texttt{install-tl-windows.bat}，就会弹出安装器窗口。这时赶紧用 “Specify mirror...” 找到我们学校的镜像！\sidenote{位于 Asia -> China -> https://mirrors.nju.edu.cn/...，其实不指定南大源也没问题，但据说校内用起来确实快一点。}
 
@@ -96,9 +100,9 @@
 
 点击链接下载安装镜像：
 
-\medskip
-\href{https://mirrors.nju.edu.cn/CTAN/systems/mac/mactex/mactex-20210328.pkg}{\faFile*[regular] Mac\hologo{TeX} 2021 安装镜像}
-\medskip
+\begin{itemize}
+  \item \href{https://mirrors.nju.edu.cn/CTAN/systems/mac/mactex/mactex-20210328.pkg}{\faFile*[regular] Mac\hologo{TeX} 2021 安装镜像}
+\end{itemize}
 
 随后点击安装镜像，在安装程序中一路“继续”。
 
@@ -115,9 +119,9 @@
 
 针对 Linux 系统，网络连接稳定时更推荐使用在线安装方式\sidenote{系统包管理器提供的版本往往较为落后}。首先下载安装器：
 
-\medskip
-\href{https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet/install-tl.zip}{\faFile*[regular] \texttt{install-tl.zip}}
-\medskip
+\begin{itemize}
+  \item \href{https://mirrors.nju.edu.cn/CTAN/systems/texlive/tlnet/install-tl.zip}{\faFile*[regular] \texttt{install-tl.zip}}
+\end{itemize}
 
 \begin{widepar}
 解压缩后，在 \texttt{install-tl} 文件所在的目录下打开终端，运行以下命令：
